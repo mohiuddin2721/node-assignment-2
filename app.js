@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(cors());
 
 app.get('/', (req, res) => {
-    res.send('Tool management is ready! YaY!')
+    res.send('Tour management is ready! YaY!')
 })
 
 module.exports = app;
