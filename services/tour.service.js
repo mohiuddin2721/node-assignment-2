@@ -22,3 +22,8 @@ exports.createTourService = async (data) => {
     const tour = await Tours.create(data)
     return tour;
 }
+
+exports.updateTourPlanService = async (id, body) => {
+    const result = await Tours.updateOne({ _id: id }, { $set: body }, { runValidators: true })
+    return result;
+}

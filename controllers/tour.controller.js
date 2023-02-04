@@ -1,7 +1,8 @@
 const {
     createTourService,
     getTourPlanService,
-    getTourByIdService
+    getTourByIdService,
+    updateTourPlanService
 } = require('../services/tour.service');
 
 exports.getTourPlan = async (req, res) => {
@@ -81,6 +82,24 @@ exports.createTour = async (req, res) => {
         res.status(400).json({
             status: 'fail',
             message: 'Data is not inserted',
+            error: error.message
+        })
+    }
+}
+
+exports.updateTourPlan = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const result = await updateTourPlanService(id, req.body)
+        res.status(200).json({
+            status: 'Success',
+            message: 'Data updated successfully!',
+            data: result
+        })
+    } catch {
+        res.status(400).json({
+            status: 'fail',
+            message: 'Data is not updated',
             error: error.message
         })
     }
