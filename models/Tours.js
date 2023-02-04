@@ -7,7 +7,7 @@ const tourSchema = mongoose.Schema({
         required: [true, "Please provide a title name"],
         unique: [true, "Name must be unique"],
         trim: true,
-        minLength: [6, "Title must be at least 3 characters."],
+        minLength: [2, "Title must be at least 3 characters."],
         maxLength: [300, "Title is too large."]
     },
     description: {
@@ -79,7 +79,7 @@ const tourSchema = mongoose.Schema({
 
 // instance method
 tourSchema.methods.logger = function () {
-    console.log(`Data saved for ${this.name}`);
+    console.log(`Data saved for ${this.title}`);
 }
 
 

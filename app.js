@@ -8,8 +8,14 @@ const mongoose = require('mongoose');
 app.use(express.json())
 app.use(cors());
 
+// routes
+const tourRoute = require('./routes/v1/tours.route');
+
+
 app.get('/', (req, res) => {
     res.send('Tour management is ready! YaY!')
 })
+
+app.use('/api/v1', tourRoute)
 
 module.exports = app;
