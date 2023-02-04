@@ -12,6 +12,12 @@ exports.getTourPlanService = async (filters, quires) => {
     return { totalTours, totalPage, tour };
 }
 
+exports.getTourByIdService = async (id) => {
+    // console.log(id)
+    const result = await Tours.findById(id)
+    return result;
+}
+
 exports.createTourService = async (data) => {
     const tour = await Tours.create(data)
     return tour;

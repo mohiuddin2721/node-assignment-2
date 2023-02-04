@@ -1,4 +1,8 @@
-const { createTourService, getTourPlanService } = require('../services/tour.service');
+const {
+    createTourService,
+    getTourPlanService,
+    getTourByIdService
+} = require('../services/tour.service');
 
 exports.getTourPlan = async (req, res) => {
     try {
@@ -14,14 +18,14 @@ exports.getTourPlan = async (req, res) => {
             const sortBy = req.query.sort.split(',').join(' ')
             quires.sortBy = sortBy;
         }
-        if(req.query.limit) {
+        if (req.query.limit) {
             const limitBy = Number(req.query.limit)
             quires.limitBy = limitBy;
         }
 
         if (req.query.fields) {
             const fields = req.query.fields.split(',').join(' ')
-            quires.fields = fields; 
+            quires.fields = fields;
         }
 
         if (req.query.page) {
@@ -32,6 +36,23 @@ exports.getTourPlan = async (req, res) => {
         }
 
         const result = await getTourPlanService(filters, quires)
+        res.status(200).json({
+            status: 'Success',
+            message: 'Data founded!',
+            data: result
+        })
+    } catch {
+        res.status(400).json({
+            status: 'fail',
+            message: 'Data is not found',
+            error: error.message
+        })
+    }
+}
+
+exports.getTourById = async (req, res) => {
+    try {
+        const result = await getTourByIdService(req.params.id)
         res.status(200).json({
             status: 'Success',
             message: 'Data founded!',
