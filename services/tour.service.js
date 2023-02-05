@@ -18,6 +18,12 @@ exports.getTourByIdService = async (id) => {
     return result;
 }
 
+exports.getTrendingTourService = async () => {
+    // console.log(id)
+    const result = await Tours.find().sort({ viewCount: -1 }).limit(3)
+    return result;
+}
+
 exports.getCheapestTourService = async () => {
     // console.log(id)
     const result = await Tours.find({}).sort({ price: 1 }).limit(3)

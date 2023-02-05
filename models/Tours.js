@@ -69,6 +69,11 @@ const tourSchema = mongoose.Schema({
         minLength: [15, "Tour included must be at least 15 characters."],
         maxLength: [600, "Tour included is too large. maximum 600 characters"]
     },
+    viewCount: {
+        type: Number,
+        default: 1,
+        minLength: 0
+    },
     person: {
         type: Number,
         required: [true, "Mention person"]

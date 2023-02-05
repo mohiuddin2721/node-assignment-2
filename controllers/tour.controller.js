@@ -1,9 +1,11 @@
+const { viewCount } = require('../middleware/viewCount');
 const {
     createTourService,
     getTourPlanService,
     getTourByIdService,
     updateTourPlanService,
-    getCheapestTourService
+    getCheapestTourService,
+    getTrendingTourService
 } = require('../services/tour.service');
 
 exports.getTourPlan = async (req, res) => {
@@ -55,6 +57,24 @@ exports.getTourPlan = async (req, res) => {
 exports.getTourById = async (req, res) => {
     try {
         const result = await getTourByIdService(req.params.id)
+        // app.use(viewCount(req.params.id))
+        const count = await viewCount(req.params.id)
+        res.status(200).json({
+            status: 'Success',
+            message: 'Data founded!',
+            data: result
+        })
+    } catch {
+        res.status(400).json({
+            status: 'fail',
+            message: 'Data is not found',
+            error: error.message
+        })
+    }
+}
+exports.getTrendingTour = async (req, res) => {
+    try {
+        const result = await getTrendingTourService(req.params.id)
         res.status(200).json({
             status: 'Success',
             message: 'Data founded!',
